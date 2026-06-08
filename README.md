@@ -158,7 +158,11 @@ The scheduled task can send you a tight ~10-line iMessage summary plus a full HT
 - Your phone number goes in the scheduled task definition.
 
 ### Email delivery (optional)
-Amalie's setup uses a custom Halfspace-branded HTML email renderer that converts the markdown brief to a styled HTML email and sends it via Mail.app + AppleScript. That code isn't in this repo — ask her if you want it.
+A Halfspace-branded HTML email renderer is included in `email-renderer/`. It converts the markdown brief to a styled HTML email and sends it via Mail.app + AppleScript.
+
+- Requires Python 3 + the `markdown` package: `pip3 install markdown`
+- Edit `email-renderer/send-mail.applescript` to set your email address
+- See `email-renderer/README.md` for full usage
 
 This is optional. The iMessage summary is enough for most days.
 
@@ -166,7 +170,7 @@ This is optional. The iMessage summary is enough for most days.
 
 ## Optional: Task board
 
-Amalie has a local task board app — a Python menubar app + local web server (port 3737) that gives a visual view of `agent_brain/tasks/`. The Claude Code assistant can also drive it (open task pages, update status) via HTTP. The code isn't in this repo; ask her if you want it.
+Amalie has a local task board app — a Python menubar app + local web server (port 3737) that gives a visual view of `agent_brain/tasks/`. The Claude Code assistant can also drive it (open task pages, update status) via HTTP. That code isn't in this repo; ask her if you want it.
 
 The briefing works fine without the task board. It reads tasks directly from `agent_brain/tasks/` regardless.
 
