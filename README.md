@@ -20,6 +20,43 @@ Run manually any time (`/morning-brief`), or a single phase (`/morning-brief bri
 
 ---
 
+## What second-brain setup this assumes
+
+This skill was built on the "brian" harness. It expects the following structure:
+
+| What | Expected path | Used by |
+|---|---|---|
+| Config flags | `.claude/constitution/config.yaml` | All phases — controls what runs |
+| Run log | `artifacts/_changelog.md` | Windowing — each run appends a timestamp entry here so the next run knows where to start |
+| Tasks | `agent_brain/tasks/*.md` | Briefing phase — task health section |
+| Feeds registry | `agent_brain/about_user/feeds.md` | Feeds phase |
+| Milestones | `agent_brain/about_user/milestones.md` | Briefing phase |
+| Project rotation | `agent_brain/about_user/project-pulse-rotation.md` | Briefing phase |
+
+Tasks are expected to be markdown files with YAML frontmatter:
+```yaml
+---
+title: Do the thing
+status: open        # open | in_progress | completed
+priority: P1        # P0 | P1 | P2
+due: 2026-06-15
+---
+```
+
+### If your setup differs
+
+The skill files are plain markdown — nothing is hard-coded in a way that can't be changed. If your brain uses different paths or conventions, the fix is always the same: open the relevant phase file and update the path or frontmatter field it reads.
+
+Common mismatches and what to edit:
+
+- **Tasks live somewhere else** — edit the tasks section of `skills/check/templates/tasks.md` to point at your folder.
+- **Config flags are in a different file** — do a find-and-replace for `.claude/constitution/config.yaml` across the phase files.
+- **No `artifacts/_changelog.md`** — create it empty, or edit the windowing logic in `skills/morning-brief/SKILL.md` step 2 to use whatever run-log you have.
+- **Different task frontmatter** — edit `skills/check/templates/tasks.md` to match your field names.
+- **No `about_user/` folder** — either create it with the three files listed above, or disable the rituals that read them (`project_pulse: false`, `milestones: false` in config).
+
+---
+
 ## Install the skills
 
 Drop the three skill folders into your brain's `.claude/skills/`:
