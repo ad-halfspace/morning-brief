@@ -51,18 +51,16 @@ The briefing phase reads your Outlook calendar and inbox for context.
 - The MCP ID in Amalie's setup is `d1eec8bf-3d2e-4e47-be24-500ddad5ccea` (yours will differ — the skill just calls the tools by name, so any M365 MCP that exposes `outlook_calendar_search` and `outlook_email_search` works).
 
 ### Personal calendar (Google Calendar)
-Amalie uses a custom MCP (`workspace/personal-calendar-mcp`) that reads a Google Calendar ICS URL.
-- The code is in `workspace/personal-calendar-mcp/` in the brian repo.
-- It needs your private Google Calendar ICS URL (Settings > "Secret address in iCal format").
-- Register it in your Claude Code MCP settings. The tool names it expects: `personal-calendar__list_today`, `personal-calendar__list_upcoming`, `personal-calendar__search_events`.
+Amalie has a custom MCP that reads a Google Calendar ICS URL — ask her for the code directly, it's not in this repo.
 
-If you use a different calendar (iCloud, Fantastical, etc.) you can swap in a different MCP — just match the tool names in `briefing.md`, or edit the phase to use whatever tools you have.
+It needs your private Google Calendar ICS URL (Google Calendar Settings > "Secret address in iCal format"). The tool names the briefing phase expects: `personal-calendar__list_today`, `personal-calendar__list_upcoming`, `personal-calendar__search_events`.
+
+If you use a different calendar (iCloud, Fantastical, etc.) you can swap in a different MCP — just edit `phases/briefing.md` to match whatever tool names your MCP exposes.
 
 ### Runna (training plan)
-If you use Runna for running training, there is a custom MCP at `workspace/runna-mcp/`.
-- Set it up the same way as personal-calendar-mcp (point it at your Runna account).
-- The briefing phase will pair today's Runna prescription with your Strava actuals.
-- If you don't use Runna: skip this entirely. The briefing phase degrades gracefully.
+If you use Runna for running training, Amalie has a custom MCP for it — ask her for the code, it's not in this repo. The briefing phase will pair today's Runna prescription with your Strava actuals.
+
+If you don't use Runna: skip this entirely. The briefing phase degrades gracefully.
 
 ### Strava (workout tracking)
 Available as a plugin in the Claude Code MCP registry.
@@ -160,23 +158,17 @@ The scheduled task can send you a tight ~10-line iMessage summary plus a full HT
 - Your phone number goes in the scheduled task definition.
 
 ### Email delivery (optional)
-Amalie's setup uses a custom Halfspace HTML email renderer (`workspace/halfspace-email-renderer/render.py`) that converts the markdown brief to a styled HTML email and sends it via Mail.app + AppleScript. If you want this:
-- The renderer code is in the brian repo at `workspace/halfspace-email-renderer/`.
-- It requires Python 3 + the `markdown` package (`pip3 install markdown`).
-- Configure the `osascript` send-mail script with your email address.
-- This is optional — the iMessage summary is enough for most days.
+Amalie's setup uses a custom Halfspace-branded HTML email renderer that converts the markdown brief to a styled HTML email and sends it via Mail.app + AppleScript. That code isn't in this repo — ask her if you want it.
+
+This is optional. The iMessage summary is enough for most days.
 
 ---
 
 ## Optional: Task board
 
-Amalie has a local task board app (`workspace/task-board/`) — a Python menubar app + web server (port 3737) that gives a visual view of `agent_brain/tasks/`. The Claude Code assistant can also drive it (open task pages, update status) via HTTP.
+Amalie has a local task board app — a Python menubar app + local web server (port 3737) that gives a visual view of `agent_brain/tasks/`. The Claude Code assistant can also drive it (open task pages, update status) via HTTP. The code isn't in this repo; ask her if you want it.
 
-To use it:
-- The code is in the brian repo at `workspace/task-board/`.
-- Requires Python 3 + `pyobjc` (`pip3 install pyobjc-core pyobjc-framework-Cocoa pyobjc-framework-WebKit`).
-- Launch with `python3 workspace/task-board/server.py` (or open the `.app` bundle if built).
-- The task board is an optional overlay — the briefing works fine without it.
+The briefing works fine without the task board. It reads tasks directly from `agent_brain/tasks/` regardless.
 
 ---
 
