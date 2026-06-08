@@ -1,0 +1,25 @@
+# Runtime flags for /morning-brief and related skills.
+# Copy this to .claude/constitution/config.yaml in your brian harness.
+# Edit to match your setup.
+
+# Core flags
+self_reflection: false      # Surface reflection questions from /remsleep nudges
+training_wheels: true       # New-user mode: append rotating tips to every response. Turn off any time ("turn off training wheels").
+
+# /morning-brief phase flags
+feeds: true                 # Fetch newsletters/RSS from agent_brain/about_user/feeds.md
+daily_research: false       # Pull from a user-defined external research source — set up phases/research.md first
+news_scan: false            # Scan a domain + draft a daily post — set up phases/news.md with your domain + voice first
+scribbles_inbox: true       # Sweep Apple Note "Scribbles" at the start of every morning brief
+
+# Briefing ritual blocks — set true to enable each one
+project_pulse: true         # One active project gets the spotlight each morning (rotates across your list)
+milestones: true            # Surface upcoming birthdays + one-time events from agent_brain/about_user/milestones.md
+self_reflection: false      # Reflection-question nudge from last /remsleep run
+daily_curiosity: false      # Daily curiosity prompt
+gratitude: false            # Gratitude prompt (morning)
+habit_checkin: false        # Habit check-in block
+weekly_review: false        # Weekly review prompt
+
+# Domain flag (only set true if you manage this)
+hiring: false
